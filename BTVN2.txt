@@ -28,7 +28,7 @@ CREATE TABLE score(
 
 INSERT INTO student(name, age, gender, classId)
 VALUES ("Vũ Tuấn Hải", 25, 1, 19),
-	   ("Lương Văn Nam", 25, 1, 13),
+	("Lương Văn Nam", 25, 1, 13),
        ("Phan Ngọc Diệu", 20, 0, 5),
        ("Nguyễn Thị Yến Nhi", 21, 0, 5),
        ("Trần Hoàng Sang", 22, 1, 9),
@@ -40,7 +40,7 @@ VALUES ("Vũ Tuấn Hải", 25, 1, 19),
 
 INSERT INTO teacher(name, age, gender, experience)
 VALUES ("Huỳnh Trung Lãm", 33, 1, 10),
-	   ("Huỳnh Phúc Điền", 36, 1, 13),
+	("Huỳnh Phúc Điền", 36, 1, 13),
        ("Lê Vân Anh", 28, 0, 5),
        ("Trần Hoàng Minh", 28, 1, 5),
        ("Phạm Thúy Huỳnh", 31, 0, 9),
@@ -52,7 +52,7 @@ VALUES ("Huỳnh Trung Lãm", 33, 1, 10),
 
 INSERT INTO score(studentCode, scoreMath, scorePhysics, scoreChemistry)
 VALUES ("12A01", 8.5, 7.3, 9.2),
-	   ("12A02", 7.5, 6.3, 8.2),
+	("12A02", 7.5, 6.3, 8.2),
        ("12A03", 8.1, 7.8, 9.0),
        ("12A04", 6.3, 7.5, 8.4),
        ("12A05", 8.6, 7.3, 9.2),
