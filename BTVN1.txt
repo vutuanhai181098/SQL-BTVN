@@ -1,0 +1,9 @@
+1. Lấy ra thông tin của sinh viên có tuổi lớn hơn 20 và nhỏ hơn 30
+    SELECT * FROM Student WHERE age > 20 AND age < 30;
+
+
+2. Lấy ra thông tin của sinh viên có tuổi bé hơn 20 hoặc lớn hơn 30
+    SELECT * FROM Student WHERE age < 20 OR age > 30;
+
+3. Lấy ra thông tin của sinh viên có tuổi cao nhất lớp    
+    SELECT * FROM Student WHERE age = (SELECT MAX(age) FROM Student);
