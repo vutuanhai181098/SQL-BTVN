@@ -1,0 +1,63 @@
+CREATE DATABASE java19;
+
+USE java19;
+
+CREATE TABLE student(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    age INT,
+    gender INT,
+    classId INT
+);
+
+CREATE TABLE teacher(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    age INT,
+    gender INT,
+    experience INT
+);
+
+CREATE TABLE score(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    studentCode VARCHAR(50),
+    scoreMath FLOAT,
+    scorePhysics FLOAT,
+    scoreChemistry FLOAT
+);
+
+INSERT INTO student(name, age, gender, classId)
+VALUES ("Vũ Tuấn Hải", 25, 1, 19),
+	   ("Lương Văn Nam", 25, 1, 13),
+       ("Phan Ngọc Diệu", 20, 0, 5),
+       ("Nguyễn Thị Yến Nhi", 21, 0, 5),
+       ("Trần Hoàng Sang", 22, 1, 9),
+       ("Lê Văn Doanh", 23, 1, 12),
+       ("Huỳnh Ngọc Kim Ngân", 19, 0, 19),
+       ("Dương Thị Mỹ Hạnh", 22, 0, 13),
+       ("Phan Huỳnh Thành Trung", 23, 1, 5),
+       ("Mạc Văn Hoàng Ân", 27, 1, 18);
+
+INSERT INTO teacher(name, age, gender, experience)
+VALUES ("Huỳnh Trung Lãm", 33, 1, 10),
+	   ("Huỳnh Phúc Điền", 36, 1, 13),
+       ("Lê Vân Anh", 28, 0, 5),
+       ("Trần Hoàng Minh", 28, 1, 5),
+       ("Phạm Thúy Huỳnh", 31, 0, 9),
+       ("Lê Trương Thảo Vy", 35, 0, 12),
+       ("Bùi Thanh Thủy", 35, 0, 12),
+       ("Nguyễn Thị Tuyết Nhi", 37, 0, 13),
+       ("Phạm Trung Kiên", 29, 1, 5),
+       ("Đặng Ngọc Anh Thư", 31, 0, 9);
+
+INSERT INTO score(studentCode, scoreMath, scorePhysics, scoreChemistry)
+VALUES ("12A01", 8.5, 7.3, 9.2),
+	   ("12A02", 7.5, 6.3, 8.2),
+       ("12A03", 8.1, 7.8, 9.0),
+       ("12A04", 6.3, 7.5, 8.4),
+       ("12A05", 8.6, 7.3, 9.2),
+       ("12A06", 6.5, 7.3, 9.2),
+       ("12A07", 8.5, 7.3, 7.2),
+       ("12A08", 7.5, 9.3, 8.2),
+       ("12A09", 6.5, 8.3, 6.2),
+       ("12A10", 8.5, 6.3, 8.2);              
