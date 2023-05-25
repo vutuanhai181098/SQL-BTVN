@@ -1,0 +1,47 @@
+1. Đưa ra thông tin gồm maGV, tenGV, tenKhoa của tất cả giảng viên:
+
+    -SELECT teacher.teacherCode, teacher.teacherName, faculty.facultyName FROM teacher JOIN faculty
+     ON teacher.facultyCode = faculty.facultyCode;
+
+
+2. Đưa ra thông tin gồm maGV, tenGV, tenKhoa của các giảng viên khoa ‘Dia ly’:
+
+    -SELECT teacher.teacherCode, teacher.teacherName, faculty.facultyName FROM teacher JOIN faculty
+     ON teacher.facultyCode = faculty.facultyCode WHERE faculty.facultyName = "Địa lý";
+
+
+3. Cho biết số sinh viên của khoa ‘CNSH’:
+
+    -SELECT COUNT(*) FROM student JOIN faculty
+     ON student.facultyCode = faculty.facultyCode WHERE faculty.facultyName = "Công nghệ sinh học";
+
+
+4. Đưa ra danh sách gồm maSV, tenSV, namSinh của các sinh viên khoa ‘Toan’:
+
+    -SELECT student.studentCode, student.studentName, student.yearOfBirth FROM student JOIN faculty
+     ON student.facultyCode = faculty.facultyCode WHERE faculty.facultyName = "Toán";
+
+
+5. Cho biết số giảng viên của khoa ‘CNSH’:
+
+    -SELECT COUNT(*) FROM teacher JOIN faculty
+     ON teacher.facultyCode = faculty.facultyCode WHERE faculty.facultyName = "Công nghệ sinh học";
+
+
+6. Cho biết thông tin về sinh viên không tham gia thực tập:
+
+    -SELECT * FROM student WHERE NOT EXISTS(SELECT * FROM instruction WHERE student.studentCode = instruction.studentCode);
+
+
+7. Đưa ra maKhoa, tenKhoa, số giảng viên của mỗi khoa:
+
+    -SELECT faculty.facultyCode, faculty.facultyName, COUNT(*) AS "numberOfTeachers" FROM faculty JOIN teacher
+     ON faculty.facultyCode = teacher.facultyCode GROUP BY faculty.facultyCode;
+
+
+8. Cho biết sdt của khoa mà sinh viên tên Nguyễn Văn A đang theo học:
+
+    -SELECT faculty.phoneNumber FROM faculty JOIN student
+     ON faculty.facultyCode = student.facultyCode WHERE student.studentName = "Nguyễn Văn A";
+
+
