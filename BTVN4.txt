@@ -1,0 +1,109 @@
+create database internship_manager;
+
+use internship_manager;
+
+create table faculty(
+	facultyId varchar(10) primary key not null,
+    facultyName varchar(100) not null,
+    phoneNumber varchar(15) not null
+);
+
+create table teacher(
+	teacherId int primary key,
+    teacherName varchar(50) not null,
+    salary float not null,
+    facultyId varchar(10) not null,
+    constraint fk_FacultyTeacher foreign key (facultyId) references Faculty(facultyId)	
+);
+
+create table student(
+	studentId int primary key auto_increment,
+    studentName varchar(50) not null,
+    facultyId varchar(10) not null,
+    yearOfBirth varchar(4),
+    address varchar(255),
+    constraint fk_FacultyStudent foreign key (facultyId) references Faculty(facultyId)
+);
+
+create table topic(
+	topicId varchar(5) primary key,
+    topicName varchar(50) not null,
+    budget float not null,
+    address varchar(255) not null
+);
+
+create table instruction(
+	topicId varchar(5) not null,
+    studentId int not null,
+    teacherId int not null,
+    score float,
+    constraint fk_TopicInstruction foreign key (topicId) references Topic(topicId),
+    constraint fk_TeacherInstruction foreign key (teacherId) references Teacher(teacherId),
+    constraint fk_StudentInstruction foreign key (studentId) references Student(studentId)
+);
+
+insert into faculty (facultyId, facultyName, phoneNumber)
+values ('Geo','Địa lý và QLTN','3855413'),
+	('Math','Toán','3855411'),
+    ('Bio','Công nghệ sinh học','3855412'); 
+
+
+insert into teacher (teacherId, teacherName, salary, facultyId)
+values (11, 'Thanh Xuan', 700, 'Geo'),
+	(12, 'Thu Minh', 500, 'Math'),
+    (13, 'Chu Tuan', 650, 'Geo'),
+    (14, 'Le Thi Lan', 500, 'Bio'),
+    (15, 'Tran Xoay', 900, 'Math');
+    
+    
+insert into student (studentName, facultyId, yearOfBirth, address)
+values ('Le Van Sao', 'Bio', '1990', 'Nghe An'),
+	('Nguyen Thi My', 'Geo', '1990', 'Thanh Hoa'),
+    ('Bui Xuan Duc', 'Math' , '1992', 'Ha Noi'),
+    ('Nguyen Van Tung', 'Bio', null, 'Ha Tinh'),
+    ('Le Khanh Linh', 'Bio', '1989', 'Ha Nam'),
+    ('Tran Khac Trong', 'Geo', '1991', 'Thanh Hoa'),
+    ('Le Thi Van', 'Math', null, null),
+    ('Hoang Van Duc', 'Bio', 1992, 'Nghe An'); 
+    
+    
+insert into topic (topicId, topicName, budget, address)
+values ('Dt01', 'GIS', 100, 'Nghe An'),
+	('Dt02', 'ARC GIS', 500, 'Nam Dinh'),
+    ('Dt03', 'Spatial DB', 100, 'Ha Tinh'),
+    ('Dt04', 'MAP', 300, 'Quang Binh');
+    
+    
+insert into instruction (topicId, studentId, teacherId, score)
+values ('Dt01', 1, 13, 8),
+	('Dt03', 2, 14, 0),
+    ('Dt03', 3, 12, 10),
+    ('Dt04', 5, 14, 7),
+    ('Dt01', 6, 13, null),
+    ('Dt04', 7, 11, 10),
+    ('Dt03', 8, 15, 6);
+
+
+ 1. Đưa ra thông tin gồm mã số, họ tên và tên khoa của tất cả các giảng viên.
+
+ -- SELECT t.teacherId, t.teacherName, f.facultyName FROM teacher t join faculty f ON t.facultyId = f.facultyId;
+
+ 2. Sử dụng lệnh xuất ra mã số, họ tên, tên khoa của các giảng viên hướng dẫn từ 3 sinh viên trở lên.
+
+    -- SELECT t.teacherId, t.teacherName, f.facultyName FROM teacher t 
+    JOIN faculty f ON t.facultyId = f.facultyId
+    JOIN instruction i on t.teacherId = i.teacherId
+    GROUP BY t.teacherId
+    HAVING COUNT(i.studentId) >= 3;
+    
+3. Sử dụng lệnh SQL để xuất ra thông tin về những sinh viên chưa có điểm thực tập.
+
+    -- SELECT * FROM student s JOIN instruction i ON s.studentId = i.studentId WHERE i.score IS NULL;
+
+    
+4. Thực hiện lệnh SQL xuất ra số điện thoại của khoa mà sinh viên có tên ‘Le Van Sao’ đang theo học.
+5. Sử dụng lệnh truy vấn SQL lấy ra mã số và tên các đề tài có nhiều hơn 2 sinh viên tham gia thực tập.
+6. Sử dụng câu lệnh truy vấn SQL lấy ra mã số, tên đề tài của đề tài có kinh phí cao nhất.
+7. Sử dụng câu lệnh SQL xuất ra Tên khoa, Số lượng sinh viên của mỗi khoa.
+8. Sử dụng truy vấn SQL xuất ra mã số, họ tên và điểm của các sinh viên khoa ‘Địa lý và QLTN’.
+9. Sử dụng câu lệnh SQL xuất ra danh sách gồm Mã số, Họ tên và Tuổi của các sinh viên khoa ‘Toán’.
