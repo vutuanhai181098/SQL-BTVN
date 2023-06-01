@@ -1,0 +1,165 @@
+create database fptShop;
+
+use fptShop;
+
+create table role_user(
+	roleId int primary key auto_increment,
+    keyRole varchar(20) not null,
+    nameRole varchar(30) not null,
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp
+);
+
+create table users(
+	userId int primary key auto_increment,
+    fullName varchar(50) not null,
+    phoneNumber varchar(15) not null,
+    address varchar(255),
+    citizenId varchar(20),
+    username varchar(32) not null,
+    pass_word varchar(15) not null,
+    email varchar(50) not null,
+    roleId int not null,
+    dateStart timestamp,
+    statuss int not null,
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_users_roleUser foreign key (roleId) references role_user(roleId)
+);
+
+create table salary(
+	id int primary key auto_increment,
+    userId int not null,
+    hardSalary float not null,
+    bonus float,
+    fines float,
+    tax float,
+    numberOfWorkingDays float,
+    monthh int,
+    statuss varchar(50),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_salary_users foreign key (userId) references users(userId)
+);
+
+create table sales(
+	id int primary key auto_increment,
+    userId int not null,
+    billNumber int not null,
+    coefficient float not null,
+    monthh int not null,
+    statuss varchar(50),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_sales_users foreign key (userId) references users(userId)
+);
+
+create table category(
+	categoryId int primary key auto_increment,
+    categoryName varchar(100) not null,
+    image varchar(255),
+    describee varchar(255),
+    statuss varchar(100),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp
+);
+
+create table supplier(
+	supplierId int primary key auto_increment,
+    supplierName varchar(100) not null,
+    image varchar(255),
+    describee varchar(255),
+    statuss varchar(100),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp
+);
+
+create table product(
+	productId int primary key auto_increment,
+    productName varchar(50) not null,
+    quantity int not null,
+    price float not null,
+    categoryId int not null,
+    supplierId int not null,
+    productionDate timestamp,
+    describee varchar(255),
+    image varchar(255),
+    detail varchar(255) not null,
+    parameter varchar(255) not null,
+    dateAdd timestamp not null,
+    statuss varchar(50),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_product_category foreign key (categoryId) references category(categoryId),
+    constraint fk_product_supplier foreign key (supplierId) references supplier(supplierId)
+);
+
+create table cart(
+	cartId int primary key auto_increment,
+    userId int not null,
+    statuss varchar(50),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_cart_users foreign key(userId) references users(userId)
+);
+
+create table detail_cart(
+	id int primary key auto_increment,
+    cartId int not null,
+    productId int not null,
+    quantity int not null,
+    create_at timestamp,
+    constraint fk_detailCart_cart foreign key(cartId) references cart(cartId),
+    constraint fk_detailCart_product foreign key(productId) references product(productId)
+);
+
+create table bill(
+	id int primary key auto_increment,
+    userID int not null,
+    cartId int not null,
+    staffID int not null,
+	date_create datetime not null,
+    address varchar(255),
+    phoneNumber varchar(15) not null,
+    note varchar(255),
+    statuss varchar(50),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_bill_users foreign key(userId) references users(userId)
+);
+
+create table detail_bill(
+	id int primary key auto_increment,
+    cartId int not null,
+    productId int not null,
+    productName varchar(100),
+    quantity int not null,
+    price float not null,
+    image varchar(255),
+    create_at timestamp,
+    constraint fk_detailBill_cart foreign key(cartId) references cart(cartId),
+    constraint fk_detailBill_product foreign key(productId) references product(productId)
+);
+
+create table review(
+	id int primary key auto_increment,
+    productId int not null,
+    userId int not null,
+    score float not null,
+    commentt varchar(255),
+    statuss varchar(50),
+    create_at timestamp,
+    update_at timestamp,
+    delete_at timestamp,
+    constraint fk_review_users foreign key(userId) references users(userId),
+    constraint fk_review_product foreign key(productId) references product(productId)
+);

@@ -85,25 +85,59 @@ values ('Dt01', 1, 13, 8),
 
 
  1. Đưa ra thông tin gồm mã số, họ tên và tên khoa của tất cả các giảng viên.
+ 
+	-- select t.teacherId, t.teacherName, f.facultyName from teacher t join faculty f on t.facultyId = f.facultyId;
 
- -- SELECT t.teacherId, t.teacherName, f.facultyName FROM teacher t join faculty f ON t.facultyId = f.facultyId;
 
- 2. Sử dụng lệnh xuất ra mã số, họ tên, tên khoa của các giảng viên hướng dẫn từ 3 sinh viên trở lên.
+2. Sử dụng lệnh xuất ra mã số, họ tên, tên khoa của các giảng viên hướng dẫn từ 3 sinh viên trở lên.
 
-    -- SELECT t.teacherId, t.teacherName, f.facultyName FROM teacher t 
-    JOIN faculty f ON t.facultyId = f.facultyId
-    JOIN instruction i on t.teacherId = i.teacherId
-    GROUP BY t.teacherId
-    HAVING COUNT(i.studentId) >= 3;
+	-- select t.teacherId, t.teacherName, f.facultyName from teacher t 
+    join faculty f on t.facultyId = f.facultyId
+    join instruction i on t.teacherId = i.teacherId
+    group by t.teacherId
+    having count(i.studentId) >= 3;
     
 3. Sử dụng lệnh SQL để xuất ra thông tin về những sinh viên chưa có điểm thực tập.
 
-    -- SELECT * FROM student s JOIN instruction i ON s.studentId = i.studentId WHERE i.score IS NULL;
+    -- select * from student s join instruction i on s.studentId = i.studentId where i.score IS NULL;
 
     
 4. Thực hiện lệnh SQL xuất ra số điện thoại của khoa mà sinh viên có tên ‘Le Van Sao’ đang theo học.
+
+    -- select f.phoneNumber from faculty f 
+    join student s on f.facultyId = s.facultyId where s.studentName = "Le Van Sao";
+
+
 5. Sử dụng lệnh truy vấn SQL lấy ra mã số và tên các đề tài có nhiều hơn 2 sinh viên tham gia thực tập.
+
+	-- select t.topicId, t.topicName from topic t 
+    join instruction i on t.topicId = i.topicId 
+    group by t.topicId 
+    having count(i.studentId) > 2;
+    
+
 6. Sử dụng câu lệnh truy vấn SQL lấy ra mã số, tên đề tài của đề tài có kinh phí cao nhất.
+
+	-- select t.topicId, t.topicName from topic t where t.budget = (select max(budget) from topic);
+
+
 7. Sử dụng câu lệnh SQL xuất ra Tên khoa, Số lượng sinh viên của mỗi khoa.
+
+	-- select f.facultyName, count(*) as numberOfStudent from faculty f 
+    join student s on f.facultyId = s.facultyId 
+    group by f.facultyId;
+    
+
 8. Sử dụng truy vấn SQL xuất ra mã số, họ tên và điểm của các sinh viên khoa ‘Địa lý và QLTN’.
+
+	-- select s.studentId, s.studentName, i.score from student s 
+    left join instruction i on s.studentId = i.studentId 
+    join faculty f on s.facultyId = f.facultyId 
+    where f.facultyName = 'Địa lý và QLTN';
+    
+
 9. Sử dụng câu lệnh SQL xuất ra danh sách gồm Mã số, Họ tên và Tuổi của các sinh viên khoa ‘Toán’.
+
+	-- select s.studentId, s.studentName, year(current_timestamp) - s.yearOfBirth as Age from student s
+    join faculty f on s.facultyId = f.facultyId
+    where f.facultyName = 'Toán';
