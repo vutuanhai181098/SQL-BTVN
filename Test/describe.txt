@@ -1,0 +1,19 @@
+Database TechMaster gồm 3 role : 
+
+1. Student :
+    - Đăng ký, đăng nhập tài khoản.
+    - Xem thông tin cá nhân.
+    - Xem bài giảng, điểm, đánh giá, thông tin liên quan đến lớp học.
+    - Viết blog.
+
+2. Teacher :
+    - Đăng ký, đăng nhập tài khoản.
+    - Xem thông tin cá nhân.
+    - Đăng bài giảng.
+    - Chấm điểm học sinh.
+    - Viết blog.
+
+3. Admin :
+    - Quản lý sinh viên và giảng viên.
+    - Quản lý các khóa học, lớp học.
+    - Quản trị hệ thống.
